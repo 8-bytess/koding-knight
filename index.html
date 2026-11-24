@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vendor/animate.min.css">
+    <link rel="stylesheet" href="css/vendor/animation_utility.css">
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+    <title>Recode - Koding Knights</title>
+    <style>
+        /* Global horizontal overflow prevention */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            position: relative;
+        }
+
+        /* Ensure proper gutters and space in X-axis across all viewports */
+        .r-container {
+            width: 100%;
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+        }
+
+        /* Compact clean menubar */
+        .navbar-nav .nav-link {
+            font-size: 0.92rem;
+            padding: 0.35rem 0.6rem !important;
+            white-space: nowrap;
+        }
+
+        /* Card hover fix: inner text turns black on hover */
+        .card-accent:hover,
+        .card-accent:hover p,
+        .card-accent:hover h4,
+        .card-accent:hover h5,
+        .card-accent:hover span,
+        .card-accent:hover .team-name,
+        .card-accent:hover .font-2,
+        .card-accent:hover .text-accent {
+            color: #000000 !important;
+            -webkit-text-fill-color: #000000 !important;
+        }
+
+        .card-accent:hover .vr {
+            background-color: #000000 !important;
+            opacity: 0.3;
+        }
+
+        /* Profile alignment fix inside review cards */
+        .customer-item {
+            width: 50px !important;
+            height: 50px !important;
+            min-width: 50px !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+            margin-left: 0 !important;
+        }
+
+        .customer-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Floating WhatsApp button */
+        .whatsapp-fixed-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+            background-color: #25D366;
+            color: #ffffff;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-fixed-btn:hover {
+            transform: scale(1.08);
+            color: #ffffff;
+            background-color: #20ba5a;
+        }
+
+        /* Responsive Mobile Layout Fixes */
+        @media (max-width: 991px) {
+            #home {
+                height: auto !important;
+                min-height: 100vh;
+                padding-top: 5.5rem !important;
+                padding-bottom: 3rem !important;
+                overflow: hidden;
+            }
+
+            .hero-content {
+                gap: 1.5rem !important;
+            }
+
+            /* Prevent mobile text from overlapping absolute illustration */
+            .hero-illustration-desktop {
+                display: none !important;
+            }
+
+            .hero-illustration-mobile {
+                display: block !important;
+            }
+
+            /* Prevent horizontal overflow from floating footer illustration */
+            .floating-footer {
+                display: none !important;
+            }
+
+            /* Footer responsive padding */
+            .footer-card {
+                padding: 24px 18px !important;
+                border-radius: 28px !important;
+            }
+
+            .enquiry-card {
+                padding: 22px 18px !important;
+                margin-right: 0 !important;
+            }
+
+            /* Quote badge alignment inside cards on mobile */
+            .quote-badge {
+                margin-left: 0.5rem !important;
+                margin-top: -0.85rem !important;
+            }
+
+            .location-box {
+                padding: 1.25rem !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hero-illustration-mobile {
+                display: none !important;
+            }
+
+            .footer-card {
+                padding: 50px !important;
+                border-radius: 60px !important;
+            }
+
+            .enquiry-card {
+                padding: 35px 30px !important;
+            }
+        }
+
+        /* Responsive FAQ accordion styling */
+        @media (max-width: 768px) {
+            .accordion .accordion-button {
+                font-size: 1.05rem !important;
+                padding: 14px 18px !important;
+                line-height: 1.4 !important;
+            }
+            .accordion .accordion-body {
+                font-size: 0.92rem !important;
+                padding: 0 18px 16px 18px !important;
+                line-height: 1.5 !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .accordion .accordion-button {
+                font-size: 1.2rem !important;
+                padding: 20px 24px !important;
+            }
+        }
+
+        /* Clean enquiry form inputs */
+        .enquiry-input {
+            padding: 10px 14px !important;
+            font-size: 0.95rem !important;
+            border-radius: 10px !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            width: 100% !important;
+        }
+
+        .enquiry-input:focus {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: var(--accent-color) !important;
+            box-shadow: none !important;
+            color: #ffffff !important;
+        }
+
+        .enquiry-input option {
+            background: #111a24;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0 px-xl-5 px-3" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container-fluid ps-2">
+                <div class="logo-container">
+                    <a class="navbar-brand" href="#home">
+                        <img src="image/logo.png" alt="Recode" class="img-fluid">
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-3 me-auto mb-2 mb-xl-0 gap-1 align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#why-us">Why Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#how-it-works">How It Works</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#courses">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#future-career">Future Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#reviews">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#location">Location</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#faqs">FAQs</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex w-max-content ps-xl-3">
+                        <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20coding%20classes." target="_blank" rel="noopener noreferrer" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center align-items-center py-2 px-3">
+                            <i class="fa-brands fa-whatsapp fs-5"></i>
+                            <span>WhatsApp Us</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main>
+        <!-- Banner / Hero Section -->
+        <div id="home" class="section position-relative bg-attach-cover"
+            style="background-image: url(image/bg_hero.png); height: 100vh; margin-top: 2em;">
+            <div class="position-absolute top-0 start-0 end-0 bottom-0 hero-illustration-desktop">
+                <div class="row row-cols-xl-2 row-cols-1 h-100">
+                    <div class="col"></div>
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <img src="image/img1.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="r-container position-relative h-100">
+                <div class="d-flex flex-column gap-4 justify-content-between scrollanimation animated fadeInLeft adr-7 h-100 hero-content"
+                    style="max-width: 900px;">
+                    <div class="d-flex flex-column gap-2 justify-content-center h-100">
+                        <h1>Empowering Young Coders with <span class="text-accent">Computer Science</span> Mastery</h1>
+                        <p>
+                            Tuition classes for computer languages at all levels — Python, C#, Scratch, C, C++ and comprehensive computer science subjects for all school levels from prep to GCSE & A level. Patient, child-focused tutoring by Kirandeep in Pinner, UK.
+                        </p>
+                        
+                        <!-- Illustration visible only in mobile document flow -->
+                        <div class="hero-illustration-mobile text-center my-3">
+                            <img src="image/img1.png" class="img-fluid" style="max-height: 240px;" alt="">
+                        </div>
+
+                        <div class="w-max-content">
+                            <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20coding%20classes." target="_blank" rel="noopener noreferrer"
+                                class="btn btn-accent-icon">
+                                <span>Connect on WhatsApp</span>
+                                <div class="icon-box">
+                                    <i class="fa-brands fa-whatsapp fs-5"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-3 row-cols-1 w-100 align-items-center" style="max-width: 800px;">
+                        <div class="col d-flex flex-column align-items-center gap-2 mb-3 accent-color">
+                            <div class="d-flex justify-content-center">
+                                <h3 class="number" data-target="100" data-duration="1000">100</h3>
+                                <h5>%</h5>
+                            </div>
+                            <h5 class="text-color-2">Child-Focused</h5>
+                        </div>
+                        <div class="col d-flex flex-column align-items-center gap-2 mb-3 accent-color">
+                            <div class="d-flex justify-content-center">
+                                <h3>Grade</h3>
+                                <h3 class="ms-2">9</h3>
+                            </div>
+                            <h5 class="text-color-2">GCSE CS Target</h5>
+                        </div>
+                        <div class="col d-flex flex-column align-items-center gap-2 mb-3 accent-color">
+                            <div class="d-flex justify-content-center">
+                                <h3>Prep - A*</h3>
+                            </div>
+                            <h5 class="text-color-2">All School Levels</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_wcu.png);">
+            <!-- Section Why Choose Us -->
+            <div id="why-us" class="r-container" style="padding-bottom: 6em;">
+                <div class="d-flex flex-column gap-5">
+                    <div
+                        class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7">
+                        <h6 class="text-accent">Why Choose Koding Knights?</h6>
+                        <h3>Benefits from our tuition classes</h3>
+                    </div>
+                    <div class="row row-cols-xl-4 row-cols-1">
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>Child-Focused & Patient</h4>
+                                    <p>Kirandeep works gently at each child's own level, providing an encouraging, calm environment where students feel safe to ask questions, experiment, and succeed.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>GCSE & A-Level Excellence</h4>
+                                    <p>Targeted exam technique, thorough past paper preparation, and deep theory coverage help students achieve top scores, including Grade 9 in GCSE Computer Science.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>All Levels: Scratch to C++</h4>
+                                    <p>Comprehensive curriculum spanning creative visual coding in Scratch for young learners through to industry languages like Python, C#, C, and C++.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>100% 5-Star Reputation</h4>
+                                    <p>Rated 5.0 out of 5 by parents on Google. Families love the clear explanations, tailored support, and noticeable boost in their children's passion for coding.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section How It Works -->
+            <div id="how-it-works" class="r-container" style="padding-top: 6em;">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="pe-xl-5">
+                            <img src="image/img2.png" class="img-fluid rounded-4 w-100" style="aspect-ratio: 6/7;"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-5">
+                            <div class="d-flex flex-column gap-2">
+                                <h6 class="text-accent">How It Works?</h6>
+                                <h3>Your Path to Coding Confidence Starts Here</h3>
+                                <p>
+                                    Follow our structured learning process from initial assessment to mastering languages and securing top grades with expert guidance and hands-on practice.
+                                </p>
+                            </div>
+                            <div class="d-flex flex-column gap-5 position-relative">
+                                <div class="devider-progress"></div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-2 position-relative">
+                                        <i class="rtmicon rtmicon-search"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">01</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>Initial Assessment & Level Matching</h5>
+                                        <p class="accent-color-4">We assess your child's current level and school stage to tailor their learning path.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-3 position-relative">
+                                        <i class="rtmicon rtmicon-post-comment"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">02</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>Interactive, Child-Focused Sessions</h5>
+                                        <p class="accent-color-4">Engage in hands-on learning with patient explanations and active practice.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-3 position-relative">
+                                        <i class="rtmicon rtmicon-folder-open"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">03</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>Build Projects & Master Exams</h5>
+                                        <p class="accent-color-4">Apply skills to real coding projects and master past papers with total confidence.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section What You'll Learn -->
+        <div id="courses" class="section">
+            <div class="r-container d-flex flex-column gap-5 align-items-center">
+                <div class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7"
+                    style="max-width: 700px;">
+                    <h6 class="text-accent">What You’ll Learn?</h6>
+                    <h3>Our Coding Classes & Computer Science</h3>
+                    <p>
+                        Explore our computer science classes designed to equip students with in-demand programming skills from prep to GCSE and A level.
+                    </p>
+                </div>
+                <div class="d-flex flex-column gap-3 w-100">
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInLeft adr-7 align-items-center">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/img3.png" class="img-fluid rounded-4 h-100 object-fit-cover w-100"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <div class="info">
+                                            <span class="small-text">All Levels</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">Beginner to Advanced</span>
+                                        </div>
+                                    </div>
+                                    <h4>Python Programming</h4>
+                                    <p>
+                                        Learn Python from the ground up! This course covers core syntax, data structures, loops, functions, object-oriented concepts, and project-based problem solving. Perfect for school curriculum and building real-world software.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20Python%20classes." target="_blank" rel="noopener noreferrer"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>Learn More</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInRight adr-7 align-items-center">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/img4.png" class="img-fluid rounded-4 h-100 object-fit-cover w-100"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <div class="info">
+                                            <span class="small-text">GCSE & A-Level</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">AQA • OCR • Edexcel</span>
+                                        </div>
+                                    </div>
+                                    <h4>GCSE & A-Level Computer Science</h4>
+                                    <p>
+                                        Targeted preparation for UK computer science exam boards. Lessons cover system architecture, computational logic, binary & hex, algorithms, pseudocode writing, database theory, and extensive past-paper walkthroughs to achieve Grade 9.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20GCSE/A-Level%20Computer%20Science%20tuition." target="_blank" rel="noopener noreferrer"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>Learn More</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInLeft adr-7 align-items-center">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/img5.png" class="img-fluid rounded-4 h-100 object-fit-cover w-100"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <div class="info">
+                                            <span class="small-text">C# • C • C++</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">Systems & OOP</span>
+                                        </div>
+                                    </div>
+                                    <h4>C#, C & C++ Programming</h4>
+                                    <p>
+                                        Master structured and object-oriented programming with C#, C, and C++. Learn strongly typed syntax, memory management, pointers, algorithm design, and foundation concepts for game development and advanced computer science.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20C/C%2B%2B/C%23%20classes." target="_blank" rel="noopener noreferrer"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>Learn More</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInRight adr-7 align-items-center">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/img14.png" class="img-fluid rounded-4 h-100 object-fit-cover w-100"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <div class="info">
+                                            <span class="small-text">Prep & Primary</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">Ages 7+</span>
+                                        </div>
+                                    </div>
+                                    <h4>Scratch & Creative Coding</h4>
+                                    <p>
+                                        The ideal launchpad into computing for young learners! Students build fun interactive animations, stories, and games with visual block coding while learning sequence, iteration, and computational thinking in an enjoyable atmosphere.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20Scratch%20creative%20coding." target="_blank" rel="noopener noreferrer"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>Learn More</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="future-career" class="section bg-attach-cover" style="background-image: url(image/bg_support.png);">
+            <!-- Section Career Support -> Future Skills -->
+            <div class="r-container" style="padding-bottom: 6em;">
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col col-xl-4 mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-5">
+                            <div class="d-flex flex-column gap-2">
+                                <h6 class="text-accent">Career & Future Skills</h6>
+                                <h3>Building Tomorrow's Tech Leaders</h3>
+                                <p>How learning computer science early with Koding Knights equips students for top university STEM degrees and high-impact technology careers.</p>
+                            </div>
+                            <div class="w-max-content">
+                                <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20classes." target="_blank" rel="noopener noreferrer" class="btn btn-white-outline d-flex flex-row gap-2 justify-content-center">
+                                    <span>Contact Kirandeep</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-xl-8 mb-3">
+                        <div class="row row-cols-xl-2 row-cols-1">
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <h4>Strong STEM Foundation</h4>
+                                        <p>Early mastery of computational logic directly accelerates performance in Mathematics, Physics, and analytical sciences across all school subjects.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <h4>Top University Admissions</h4>
+                                        <p>Outstanding GCSE and A-Level Computer Science scores make university applications shine for competitive UK and Russell Group CS programs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <h4>Software Engineering Mindset</h4>
+                                        <p>Students learn clean code practices, algorithmic thinking, modular design, and systematic debugging used daily by professional software engineers.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <h4>Problem Solving & Resilience</h4>
+                                        <p>Coding trains children to deconstruct intricate problems into manageable steps, cultivating persistent, confident thinkers ready for any career.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Location with proper mobile X-axis space & clean Map Button -->
+        <div id="location" class="r-container d-flex flex-column gap-5" style="padding-block: 5em;">
+            <div class="p-lg-4 p-3 rounded-4 border border-accent-5 location-box">
+                <div class="row row-cols-xl-2 row-cols-1 mb-3">
+                    <div class="col scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2">
+                            <h6 class="text-accent">Tuition Location</h6>
+                            <h3>Join Us at Our Convenient Location</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-2 row-cols-1 align-items-center">
+                    <div class="col mb-3">
+                        <div class="card-service scrollanimation animated fadeInLeft adr-7">
+                            <div class="d-flex flex-column gap-3">
+                                <div
+                                    class="d-flex flex-row p-1 border border-accent-2 rounded-pill w-max-content">
+                                    <div class="px-3 py-1 bg-accent-color-3 accent-color-primary rounded-pill">
+                                        <span class="small-text">In-Person</span>
+                                    </div>
+                                    <div class="px-3 py-1">
+                                        <span class="small-text">Pinner, UK</span>
+                                    </div>
+                                </div>
+                                <h4>Koding Knights</h4>
+                                <p class="mb-0">
+                                    54 Lyndhurst Gardens, Pinner HA5 3XG, United Kingdom<br>
+                                    Monday – Friday: 9:00 AM – 7:30 PM (Saturday & Sunday: Closed)<br>
+                                    Phone: +44 7466 484098
+                                </p>
+                            </div>
+                            <div class="pt-2">
+                                <a href="https://maps.google.com/?q=54+Lyndhurst+Gardens,+Pinner+HA5+3XG,+United+Kingdom" target="_blank" rel="noopener noreferrer" class="btn btn-accent d-inline-flex flex-row gap-2 align-items-center py-2 px-3 rounded-pill text-nowrap">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <span>View on Google Maps</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <img src="image/img6.png" class="img-fluid h-100 rounded-4 w-100" style="transition: all 0.5s; object-fit: cover; max-height: 420px;"
+                            alt="Location">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Success Stories -> Initially 4 Reviews with Load More -->
+        <div id="reviews" class="r-container d-flex flex-column gap-5 align-items-center">
+            <div class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7"
+                style="max-width: 700px;">
+                <h6 class="text-accent">Success Stories</h6>
+                <h3>What Parents Say About Our Classes</h3>
+                <p>
+                    Discover how our tuition has empowered students to build confidence, master computer science, and achieve top grades.
+                </p>
+            </div>
+            
+            <div class="row row-cols-xl-2 row-cols-1 g-4 w-100" id="reviewsGrid">
+                <!-- Review 1 (Initial) -->
+                <div class="col review-card-item">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Kiran has been an excellent Computing tutor for our son. The lessons were clear, focused and tailored to the areas in which he needed support. She helped strengthen his understanding, confidence and exam technique, and he achieved a Grade 9 in GCSE Computer Science. We are very grateful and would highly recommend Kiran.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img8.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Neha Misra</h5>
+                                        <span class="font-2">Rating: 5.0 • GCSE Computer Science</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 (Initial) -->
+                <div class="col review-card-item">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Kirandeep really help my child in achieving high scores. Her teaching style is very child focused. She is very calm and works with child's level. She is the best computer science tutor, would definitely recommend her.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img9.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Meenakshi Kumar</h5>
+                                        <span class="font-2">Rating: 5.0 • Computer Science Tuition</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 (Initial) -->
+                <div class="col review-card-item">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>We’re really happy with the progress our daughter has made since starting Python lessons with Kirandeep. She was a bit unsure at first, but Kiran has been incredibly patient, encouraging, and great at explaining things in a simple, structured way.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img10.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Pankaj Phooli</h5>
+                                        <span class="font-2">Rating: 5.0 • Python Lessons</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 4 (Initial) -->
+                <div class="col review-card-item">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Kiran is a great and very talented computer science teacher. Kiran is passionate, adaptable, and dedicated to student success, fostering a supportive and engaging learning environment. My son started feeling confident and enjoying coding and I highly recommend Kiran to a child.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img11.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Kasuni Ratnayake</h5>
+                                        <span class="font-2">Rating: 5.0 • Coding & CS</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 5 (Hidden initially) -->
+                <div class="col review-card-item review-item-extra d-none">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Kiran is extremely talented and child focused tutor. My child started python lessons with her about 2 months ago and he is feeling amazing and confident. She gets on the child's own level to make the concept easy to understand.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img12.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">M K</h5>
+                                        <span class="font-2">Rating: 5.0 • Python Lessons</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 6 (Hidden initially) -->
+                <div class="col review-card-item review-item-extra d-none">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>My daughter is currently taking coding classes at Koding Knights and she is thoroughly enjoying her learning experience. Kiran is very good at explaining the complex concepts in a way that's easy for the kids to comprehend.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img7.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Jasu Kaur</h5>
+                                        <span class="font-2">Rating: 5.0 • Coding Classes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 7 (Hidden initially) -->
+                <div class="col review-card-item review-item-extra d-none">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Kirandeep is an amazing and an enthusiastic tutor. She has genuine passion for teaching and delivers the concepts in the best possible way. I would personally recommend ‘Koding Knights’ for someone who is keen and wants to build confidence in coding.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img8.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Kanika Agrawal</h5>
+                                        <span class="font-2">Rating: 5.0 • Coding Tuition</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 8 (Hidden initially) -->
+                <div class="col review-card-item review-item-extra d-none">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Koding Knights is the perfect place to start your child’s coding journey. Kiran is a great tutor, highly knowledgeable and motivating. Will highly recommend.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img9.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Ruchira Kapoor</h5>
+                                        <span class="font-2">Rating: 5.0 • Coding Journey</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 9 (Hidden initially) -->
+                <div class="col review-card-item review-item-extra d-none">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Kirandeep is an excellent teacher/tutor. My son needed help with computer science GCSEs. After a few sessions with Kirandeep, he felt so much more confident about applying for the exam. Many thanks.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img10.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Raashi Chauhan</h5>
+                                        <span class="font-2">Rating: 5.0 • GCSE Computer Science</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 10 (Hidden initially) -->
+                <div class="col review-card-item review-item-extra d-none">
+                    <div class="position-relative h-100">
+                        <div class="position-absolute start-0 top-0 overflow-visible quote-badge"
+                            style="z-index: 9999; margin-left: -0.75rem; margin-top: -0.75rem;">
+                            <div class="icon-box" style="width: 44px; height: 44px;">
+                                <i class="rtmicon rtmicon-blockquote fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="card-accent py-4 h-100">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-start d-flex flex-column justify-content-between h-100">
+                                <p>Excellent teaching. My son is thoroughly enjoying this.</p>
+                                <div class="d-flex flex-row gap-3 align-items-center mt-3">
+                                    <div class="customer-item flex-shrink-0">
+                                        <img src="image/img11.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="vr"></div>
+                                    <div class="d-flex flex-column text-start" style="min-width: 0;">
+                                        <h5 class="m-0 team-name">Prerana Verma</h5>
+                                        <span class="font-2">Rating: 5.0 • Coding Classes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Reviews Button -->
+            <div class="w-80 text-center mt-2" id="loadMoreContainer">
+                <button type="button" id="loadMoreBtn" class="btn btn-accent d-inline-flex flex-row gap-2 justify-content-center align-items-center px-4 py-2 rounded-pill">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Load More Reviews</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section FAQs with Optimized Font Sizes -->
+        <div id="faqs" class="section py-5">
+            <div class="r-container" style="padding-top: 2em;">
+                <div class="row row-cols-xl-2 row-cols-1 align-items-start">
+                    <div class="col mb-4 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2">
+                            <h6 class="text-accent">FAQs</h6>
+                            <h3>Got Questions About Our Classes?</h3>
+                            <p class="text-color-2">
+                                Get answers to common questions before starting your child's learning journey.
+                            </p>
+                            <div class="mt-2">
+                                <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20have%20a%20question%20about%20your%20classes." target="_blank" rel="noopener noreferrer" class="btn btn-accent d-inline-flex flex-row gap-2 align-items-center py-2 px-3 rounded-pill text-nowrap">
+                                    <i class="fa-brands fa-whatsapp fs-5"></i>
+                                    <span>Ask Kirandeep on WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-3 w-100">
+                            <div class="accordion d-flex flex-column gap-3" id="faqAccordion1">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true"
+                                            aria-controls="faq1">
+                                            What age groups and school levels do you cater to?
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            We teach all school levels, starting from young learners at Prep and Primary school (ages 7+) with Scratch and basic computational thinking, up to secondary students studying GCSE and A-Level Computer Science.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                            Which computer programming languages do you teach?
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse"
+                                        data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            We provide tuition in <strong>Python, C#, Scratch, C, and C++</strong>, as well as core Computer Science theory, pseudocode, database concepts, algorithms, and data structures.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false"
+                                            aria-controls="faq3">
+                                            Can you help with GCSE or A-Level exam preparation?
+                                        </button>
+                                    </h2>
+                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Yes! Kirandeep specializes in GCSE and A-Level Computer Science syllabus preparation (AQA, OCR, Edexcel). Many of our students have achieved Grade 9s thanks to personalized exam technique coaching and extensive past paper walkthroughs.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false"
+                                            aria-controls="faq4">
+                                            What if my child is a complete beginner?
+                                        </button>
+                                    </h2>
+                                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Complete beginners are very welcome! Kirandeep is exceptionally patient and adapts lessons to meet each child at their current level, ensuring they feel confident, supported, and engaged.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false"
+                                            aria-controls="faq5">
+                                            Where are the classes held and what are the timings?
+                                        </button>
+                                    </h2>
+                                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Classes take place at <strong>54 Lyndhurst Gardens, Pinner HA5 3XG</strong>, open Monday through Friday from <strong>9:00 AM to 7:30 PM</strong>.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer with Cleaned Enquiry Section -->
+    <footer>
+        <div class="section py-4 bg-attach-cover" style="background-image: url(image/bg_footer.png);">
+            <div class="r-container">
+                <div class="d-flex flex-column gap-3 bg-accent text-white footer-card">
+                    <div class="row row-cols-xl-2 row-cols-1 align-items-center">
+                        <div class="col col-xl-7 mb-4">
+                            <div class="d-flex flex-column gap-4 position-relative">
+                                <div class="logo-container">
+                                    <img src="image/logo.png" alt="Recode" width="20">
+                                </div>
+                                <p class="text-color-2 mb-0" style="max-width: 500px; font-size: 0.95rem;">
+                                    Tuition classes for computer languages at all levels — Python, C#, Scratch, C, C++ and computer science subjects for all school levels from prep to GCSE & A level.
+                                </p>
+                                <div class="d-flex flex-column gap-2 text-color-2 small">
+                                    <div><i class="fa-solid fa-location-dot accent-color me-2"></i>54 Lyndhurst Gardens, Pinner HA5 3XG, United Kingdom</div>
+                                    <div><i class="fa-solid fa-phone accent-color me-2"></i>+44 7466 484098</div>
+                                    <div><i class="fa-solid fa-clock accent-color me-2"></i>Mon – Fri: 9:00 AM – 7:30 PM (Sat & Sun: Closed)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-xl-5 mb-3">
+                            <div class="bg-accent shadow-accent rounded-4 enquiry-card" style="background: rgba(0,0,0,0.45); backdrop-filter: blur(10px); border: 1px solid var(--accent-color-5);">
+                                <h4 class="text-white mb-1" style="font-size: 1.35rem;">Enquire for Coding Classes</h4>
+                                <p class="accent-color-4 small mb-3">Leave your details and Kirandeep will get back to you promptly.</p>
+                                
+                                <form class="d-flex flex-column gap-2 needs-validation form" novalidate>
+                                    <input type="text" name="action" value="appointment" hidden>
+                                    <div>
+                                        <input type="text" class="form-control enquiry-input" name="name" id="name"
+                                            placeholder="Your Full Name" required>
+                                    </div>
+                                    <div>
+                                        <input type="email" class="form-control enquiry-input" name="email" id="email"
+                                            placeholder="Your E-mail" required>
+                                    </div>
+                                    <div>
+                                        <input type="tel" class="form-control enquiry-input" name="phone" id="phone"
+                                            placeholder="Phone Number / WhatsApp" required>
+                                    </div>
+                                    <div>
+                                        <select name="subject" id="subject" class="form-control form-select enquiry-input" required>
+                                            <option value="" selected>Select Class / Subject</option>
+                                            <option value="python">Python Programming</option>
+                                            <option value="gcse">GCSE Computer Science</option>
+                                            <option value="alevel">A-Level Computer Science</option>
+                                            <option value="cpp">C / C++ / C#</option>
+                                            <option value="scratch">Scratch (Prep & Primary)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <textarea class="form-control enquiry-input" id="message" name="message" rows="3"
+                                            placeholder="Child's school level & questions"></textarea>
+                                    </div>
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-accent w-100 py-2 rounded-pill fw-semibold">
+                                            <span>Submit Enquiry</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center pt-3 border-top border-accent-4">
+                        <small class="accent-color-4">Koding Knights • Pinner, United Kingdom</small>
+                        <span class="accent-color-4 small font-2">
+                            © 2026. All Rights Reserved
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Action Button -->
+    <a href="https://wa.me/447466484098?text=Hello%20Koding%20Knights,%20I%20would%20like%20to%20enquire%20about%20coding%20classes." target="_blank" rel="noopener noreferrer"
+        class="whatsapp-fixed-btn" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/swiper-script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/video_embedded.js"></script>
+    <script src="js/vendor/fslightbox.js"></script>
+    <script src="js/vendor/oyethemes_onscroll_animation.js"></script>
+
+    <!-- Load More Reviews Script (Shows 4 initially, loads 4 on click) -->
+    <script>
+        $(function() {
+            $('#loadMoreBtn').on('click', function(e) {
+                e.preventDefault();
+                var hiddenReviews = $('.review-item-extra.d-none');
+                hiddenReviews.slice(0, 4).removeClass('d-none').addClass('animated fadeIn');
+                if ($('.review-item-extra.d-none').length === 0) {
+                    $('#loadMoreContainer').fadeOut(300);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
