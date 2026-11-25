@@ -4037,7 +4037,11 @@ a:hover .icon-box-2 {
     /* Header, Footer and Navigation Setting  */
     /* ---------------------------- */
     .logo-container {
-        max-width: 100px;
+        max-width: 38px;
+    }
+
+    .navbar{
+        padding-block: 0.5rem;
     }
 
     .nav-link {
