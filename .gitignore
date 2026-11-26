@@ -1,0 +1,7 @@
+.kiro
+.agents
+node_modules
+screenshots_initial
+screenshots_responsive
+test_shot*
+take_screenshots.js
